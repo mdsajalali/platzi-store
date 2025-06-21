@@ -2,54 +2,120 @@
   <div class="container mx-auto px-4 py-4 flex justify-between items-center">
     <a routerLink="/" class="text-2xl font-bold text-gray-800">Platzi Store</a>
 
+    <!-- Desktop Menu -->
     <div class="hidden md:flex space-x-6">
       <a routerLink="/" class="text-gray-600 hover:text-gray-800">Home</a>
-      <a routerLink="/products" class="text-gray-600 hover:text-gray-800">Products</a>
-      <a routerLink="/contact" class="text-gray-600 hover:text-gray-800">Contact</a>
+      <a routerLink="/products" class="text-gray-600 hover:text-gray-800"
+        >Products</a
+      >
+      <a routerLink="/contact" class="text-gray-600 hover:text-gray-800"
+        >Contact</a
+      >
     </div>
 
     <div class="flex items-center space-x-4">
-      <a routerLink="/cart">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round" class="lucide lucide-shopping-cart">
+      <a routerLink="/cart" class="relative inline-block">
+        <!-- cart icon -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-shopping-cart"
+        >
           <circle cx="8" cy="21" r="1" />
           <circle cx="19" cy="21" r="1" />
-          <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 
-            1.95-1.57l1.65-7.43H5.12" />
+          <path
+            d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 
+            1.95-1.57l1.65-7.43H5.12"
+          />
         </svg>
+
+        <span
+          class="absolute -top-1.5 -right-2 bg-red-600 text-white text-[10px] font-semibold rounded-full min-w-[20px] h-5 flex items-center justify-center shadow-md select-none"
+        >
+          3
+        </span>
       </a>
 
-      <button (click)="toggleSidebar()" class="md:hidden text-gray-600 focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
+      <button
+        (click)="toggleSidebar()"
+        class="md:hidden text-gray-600 focus:outline-none"
+      >
+        <svg
+          class="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h16M4 18h16"
+          ></path>
         </svg>
       </button>
     </div>
   </div>
 
   <div
-    class="fixed inset-0 bg-black/30 bg-opacity-50 z-40 transition-opacity duration-300"
+    class="fixed inset-0 bg-black/30 z-40 transition-opacity duration-300"
     *ngIf="isSidebarOpen"
     (click)="toggleSidebar()"
   ></div>
 
   <div
     class="fixed top-0 left-0 w-64 h-full bg-white z-50 transform transition-transform duration-300"
-    [ngClass]="{ '-translate-x-full': !isSidebarOpen, 'translate-x-0': isSidebarOpen }"
+    [ngClass]="{
+      '-translate-x-full': !isSidebarOpen,
+      'translate-x-0': isSidebarOpen
+    }"
   >
     <div class="p-4 flex justify-between items-center border-b border-gray-300">
       <span class="font-bold text-lg">Menu</span>
       <button (click)="toggleSidebar()" class="text-gray-600">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-x-icon lucide-x"
+        >
+          <path d="M18 6 6 18" />
+          <path d="m6 6 12 12" />
+        </svg>
       </button>
     </div>
     <div class="px-4 py-2 space-y-2">
-      <a routerLink="/" class="block py-2 text-gray-600 hover:text-gray-800" (click)="toggleSidebar()">Home</a>
-      <a routerLink="/products" class="block py-2 text-gray-600 hover:text-gray-800" (click)="toggleSidebar()">Products</a>
-      <a routerLink="/contact" class="block py-2 text-gray-600 hover:text-gray-800" (click)="toggleSidebar()">Contact</a>
+      <a
+        routerLink="/"
+        class="block py-2 text-gray-600 hover:text-gray-800"
+        (click)="toggleSidebar()"
+        >Home</a
+      >
+      <a
+        routerLink="/products"
+        class="block py-2 text-gray-600 hover:text-gray-800"
+        (click)="toggleSidebar()"
+        >Products</a
+      >
+      <a
+        routerLink="/contact"
+        class="block py-2 text-gray-600 hover:text-gray-800"
+        (click)="toggleSidebar()"
+        >Contact</a
+      >
     </div>
   </div>
 </nav>
