@@ -1,29 +1,90 @@
 <div class="flex flex-col md:flex-row bg-white text-gray-900 p-4 container mx-auto">
+  <!-- Sidebar -->
   <div class="w-full md:w-1/4 p-4">
-    <!-- Search & Categories UI as you wrote -->
     <div class="mb-4">
       <input
         type="search"
+        [ngModel]="searchTitle()"
+        (ngModelChange)="updateSearch($event)"
         placeholder="Search..."
         class="w-full p-2 rounded-lg bg-gray-100 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-600"
       />
     </div>
     <div class="bg-gray-50 p-4 rounded-lg shadow">
-      <h3 class="text-purple-600 mb-2 font-semibold">Categories:</h3>
+      <h3 class=" mb-2 font-semibold">Categories:</h3>
       <ul class="space-y-2">
-        <li class="hover:text-purple-600 cursor-pointer">All</li>
-        <li class="hover:text-purple-600 cursor-pointer">Clothes</li>
-        <li class="hover:text-purple-600 cursor-pointer">Furniture</li>
-        <li class="hover:text-purple-600 cursor-pointer">Electronics</li>
-        <li class="hover:text-purple-600 cursor-pointer">Shoes</li>
-        <li class="hover:text-purple-600 cursor-pointer">Miscellaneous</li>
+        <li
+          (click)="filterByCategory(null)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === null,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== null
+          }"
+          class="cursor-pointer"
+        >
+          All
+        </li>
+        <li
+          (click)="filterByCategory(1)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === 1,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== 1
+          }"
+          class="cursor-pointer"
+        >
+          Clothes
+        </li>
+        <li
+          (click)="filterByCategory(2)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === 2,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== 2
+          }"
+          class="cursor-pointer"
+        >
+          Furniture
+        </li>
+        <li
+          (click)="filterByCategory(3)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === 3,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== 3
+          }"
+          class="cursor-pointer"
+        >
+          Electronics
+        </li>
+        <li
+          (click)="filterByCategory(4)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === 4,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== 4
+          }"
+          class="cursor-pointer"
+        >
+          Shoes
+        </li>
+        <li
+          (click)="filterByCategory(5)"
+          [ngClass]="{
+            'text-purple-600 font-semibold': selectedCategory() === 5,
+            'hover:text-purple-600 text-gray-700': selectedCategory() !== 5
+          }"
+          class="cursor-pointer"
+        >
+          Miscellaneous
+        </li>
       </ul>
     </div>
+    
   </div>
 
+  <!-- Products Grid -->
   <div class="w-full md:w-3/4 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <ng-container *ngIf="loading">Loading products...</ng-container>
-    <ng-container *ngIf="!loading && products.length === 0">No products found.</ng-container>
-    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
+    <ng-container *ngIf="loading()">Loading products...</ng-container>
+    <ng-container *ngIf="!loading() && products().length === 0">No products found.</ng-container>
+    <app-product-card
+      *ngFor="let product of products()"
+      [product]="product"
+    ></app-product-card>
   </div>
 </div>
