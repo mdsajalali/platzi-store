@@ -1,7 +1,6 @@
-<div
-  class="flex flex-col md:flex-row bg-white text-gray-900 p-4 container mx-auto"
->
+<div class="flex flex-col md:flex-row bg-white text-gray-900 p-4 container mx-auto">
   <div class="w-full md:w-1/4 p-4">
+    <!-- Search & Categories UI as you wrote -->
     <div class="mb-4">
       <input
         type="search"
@@ -22,14 +21,9 @@
     </div>
   </div>
 
-  <div
-    class="w-full md:w-3/4 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-  >
-    <app-product-card />
-    <app-product-card />
-    <app-product-card />
-    <app-product-card />
-    <app-product-card />
-    <app-product-card />
+  <div class="w-full md:w-3/4 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <ng-container *ngIf="loading">Loading products...</ng-container>
+    <ng-container *ngIf="!loading && products.length === 0">No products found.</ng-container>
+    <app-product-card *ngFor="let product of products" [product]="product"></app-product-card>
   </div>
 </div>
