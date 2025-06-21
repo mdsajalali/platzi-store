@@ -10,8 +10,14 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   isSidebarOpen = false;
+  isMobileDashboardOpen = false;
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
+    this.isMobileDashboardOpen = false;
+  }
+
+  toggleMobileDashboard() {
+    this.isMobileDashboardOpen = !this.isMobileDashboardOpen;
   }
 }
