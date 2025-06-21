@@ -3,15 +3,16 @@
     <a routerLink="/" class="text-2xl font-bold text-gray-800">Platzi Store</a>
     <div class="hidden md:flex space-x-6">
       <a routerLink="/" class="text-gray-600 hover:text-gray-800">Home</a>
-      <a routerLink="products" class="text-gray-600 hover:text-gray-800"
-        >Shop</a
+      <a routerLink="/products" class="text-gray-600 hover:text-gray-800"
+        >Products</a
       >
       <a routerLink="/contact" class="text-gray-600 hover:text-gray-800"
         >Contact</a
       >
     </div>
     <div class="flex items-center space-x-4">
-      <svg
+      <a routerLink="/cart">
+        <svg
         xmlns="http://www.w3.org/2000/svg"
         width="24"
         height="24"
@@ -29,6 +30,7 @@
           d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"
         />
       </svg>
+      </a>
     </div>
     <!-- Mobile Menu Button -->
     <button class="md:hidden text-gray-600 focus:outline-none">
