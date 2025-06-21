@@ -4,6 +4,8 @@ import { Product } from '../../types';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -17,9 +19,24 @@ export class ProductsComponent {
   searchTitle = signal<string>('');
   selectedCategory = signal<number | null>(null);
 
-  constructor(private productService: ProductService) {
-    effect(() => {
+  private routeSub: Subscription;
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) {
+    // Subscribe to query param changes
+    this.routeSub = this.route.queryParamMap.subscribe((params: ParamMap) => {
+      const catId = params.get('categoryId');
+      this.selectedCategory.set(catId ? +catId : null);
       this.fetchProducts();
+    });
+
+    // Optional: watch signals for title or category changes and refetch products
+    effect(() => {
+      this.searchTitle();
+      this.selectedCategory();
+      // fetchProducts(); // This can be redundant if you rely on route param subscription to fetch
     });
   }
 
@@ -36,7 +53,9 @@ export class ProductsComponent {
           this.products.set(res);
           this.loading.set(false);
         },
-        error: () => this.loading.set(false),
+        error: () => {
+          this.loading.set(false);
+        },
       });
   }
 
@@ -47,6 +66,12 @@ export class ProductsComponent {
 
   filterByCategory(id: number | null) {
     this.selectedCategory.set(id);
+    // Optionally update URL query param here if you want sync
+    // For example using router.navigate([...], { queryParams: { categoryId: id }})
     this.fetchProducts();
+  }
+
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 }

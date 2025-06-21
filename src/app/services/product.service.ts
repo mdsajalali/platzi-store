@@ -42,4 +42,10 @@ export class ProductService {
   getProductById(productId: number): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/${productId}`);
   }
+
+  getCategories() {
+    return this.http.get<{ id: number; name: string; image: string }[]>(
+      'https://api.escuelajs.co/api/v1/categories'
+    );
+  }
 }
