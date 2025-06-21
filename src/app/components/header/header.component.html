@@ -20,7 +20,7 @@
           class="absolute top-6 left-0 bg-white border border-gray-200 rounded-md shadow-md w-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 invisible group-hover:visible">
           <a routerLink="/dashboard/products" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">All
             Products</a>
-          <a routerLink="/dashboard/add-product" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Add
+          <a routerLink="/dashboard/create" class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Add
             Product</a>
         </div>
       </div>
@@ -89,7 +89,7 @@
         <div *ngIf="isMobileDashboardOpen" class="ml-4 space-y-1 transition-all duration-300">
           <a routerLink="/dashboard/products" class="block text-sm py-1 text-gray-600 hover:text-gray-800"
             (click)="toggleSidebar()">All Products</a>
-          <a routerLink="/dashboard/add-product" class="block text-sm py-1 text-gray-600 hover:text-gray-800"
+          <a routerLink="/dashboard/create" class="block text-sm py-1 text-gray-600 hover:text-gray-800"
             (click)="toggleSidebar()">Add Product</a>
         </div>
       </div>
