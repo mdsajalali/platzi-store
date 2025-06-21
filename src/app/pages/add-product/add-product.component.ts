@@ -1,6 +1,15 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormArray, ReactiveFormsModule, AbstractControl, ValidationErrors } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  FormArray,
+  ReactiveFormsModule,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-add-product',
@@ -12,13 +21,17 @@ import { Router } from '@angular/router';
 export class AddProductComponent {
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private productService: ProductService
+  ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
       price: [null, [Validators.required, Validators.min(1)]],
       description: ['', Validators.required],
       categoryId: [null, [Validators.required, this.categoryIdValidator]],
-      images: this.fb.array([], Validators.required),
+      images: this.fb.array([], Validators.required), // only URLs allowed here
     });
   }
 
@@ -34,19 +47,18 @@ export class AddProductComponent {
     return null;
   }
 
-  onFileChange(event: Event) {
+  addImageUrl(event: Event) {
     const input = event.target as HTMLInputElement;
-    if (!input.files) return;
+    const url = input.value.trim();
 
-    const files = Array.from(input.files);
-    for (let file of files) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const result = reader.result as string;
-        this.images.push(this.fb.control(result));
-      };
-      reader.readAsDataURL(file);
+    if (url && url.startsWith('http')) {
+      this.images.push(this.fb.control(url));
+      input.value = '';
     }
+  }
+
+  removeImage(index: number) {
+    this.images.removeAt(index);
   }
 
   onSubmit() {
@@ -56,8 +68,16 @@ export class AddProductComponent {
     }
 
     const data = this.form.value;
-    console.log('Submitted:', data);
-    alert('✅ Product created successfully!');
-    this.router.navigate(['/all-products']);
+
+    this.productService.createProduct(data).subscribe({
+      next: () => {
+        alert('✅ Product created successfully!');
+        this.router.navigate(['/dashboard/products']);
+      },
+      error: (err) => {
+        console.error('❌ Failed to create product', err);
+        alert('❌ Failed to create product');
+      },
+    });
   }
 }

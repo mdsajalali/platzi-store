@@ -79,24 +79,35 @@
       </p>
     </div>
 
-    <!-- Image Upload -->
+    <!-- Image URL Input -->
     <div>
-      <label class="block text-sm font-medium text-gray-700"
-        >Upload Images</label
-      >
+      <label class="block text-sm font-medium text-gray-700">Image URL</label>
       <input
-        type="file"
-        (change)="onFileChange($event)"
-        accept="image/*"
-        multiple
-        class="mt-1 block w-full text-sm text-gray-600"
+        type="text"
+        (blur)="addImageUrl($event)"
+        placeholder="Enter image URL"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2"
       />
       <p
         *ngIf="form.get('images')?.invalid && form.get('images')?.touched"
         class="text-red-500 text-sm"
       >
-        At least one image is required
+        At least one image URL is required
       </p>
+    </div>
+
+    <!-- Show added images -->
+    <div
+      *ngFor="let imgCtrl of images.controls; let i = index"
+      class="flex items-center space-x-2 mt-2"
+    >
+      <img
+        [src]="imgCtrl.value"
+        alt="preview"
+        class="w-12 h-12 object-cover rounded"
+      />
+      <span class="truncate max-w-xs">{{ imgCtrl.value }}</span>
+      <button (click)="removeImage(i)" class="text-red-500 font-bold">X</button>
     </div>
 
     <!-- Submit -->

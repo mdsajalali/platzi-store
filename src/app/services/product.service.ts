@@ -28,4 +28,14 @@ export class ProductService {
   deleteProduct(productId: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${productId}`);
   }
+
+  createProduct(data: {
+    title: string;
+    price: number;
+    description: string;
+    categoryId: number;
+    images: string[];
+  }): Observable<any> {
+    return this.http.post(this.apiUrl, data);
+  }
 }
