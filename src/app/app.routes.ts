@@ -29,7 +29,7 @@ export const routes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'dashboard/all-products',
+    path: 'dashboard/products',
     component: AllProductsComponent,
   },
   {
