@@ -1,0 +1,127 @@
+<div class="py-10 bg-gray-100 flex items-center justify-center p-4">
+  <form
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+    class="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl space-y-6"
+  >
+    <h2 class="text-2xl font-bold text-gray-800">Update Product</h2>
+
+    <!-- Title -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Title</label>
+      <input
+        formControlName="title"
+        type="text"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <p
+        *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+        class="text-red-500 text-sm"
+      >
+        Title is required
+      </p>
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Price</label>
+      <input
+        formControlName="price"
+        type="number"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <p
+        *ngIf="form.get('price')?.invalid && form.get('price')?.touched"
+        class="text-red-500 text-sm"
+      >
+        Price must be at least 1
+      </p>
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Description</label>
+      <textarea
+        formControlName="description"
+        rows="4"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      ></textarea>
+      <p
+        *ngIf="
+          form.get('description')?.invalid && form.get('description')?.touched
+        "
+        class="text-red-500 text-sm"
+      >
+        Description is required
+      </p>
+    </div>
+
+    <!-- Category ID -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Category ID</label>
+      <input
+        formControlName="categoryId"
+        type="number"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
+      <p
+        *ngIf="
+          form.get('categoryId')?.touched && form.get('categoryId')?.errors
+        "
+        class="text-red-500 text-sm"
+      >
+        <span *ngIf="form.get('categoryId')?.errors?.['required']"
+          >Category ID is required</span
+        >
+        <span *ngIf="form.get('categoryId')?.errors?.['invalidCategoryId']">
+          Category ID must be between 1 and 6
+        </span>
+      </p>
+    </div>
+
+    <!-- Image URL Input -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700"
+        >Add Image URL</label
+      >
+      <input
+        type="text"
+        (blur)="addImageUrl($event)"
+        placeholder="Enter image URL"
+        class="mt-1 block w-full border border-gray-300 rounded-md p-2"
+      />
+      <p
+        *ngIf="form.get('images')?.invalid && form.get('images')?.touched"
+        class="text-red-500 text-sm"
+      >
+        At least one image URL is required
+      </p>
+    </div>
+
+    <!-- Show added images -->
+    <div
+      *ngFor="let imgCtrl of images.controls; let i = index"
+      class="flex items-center space-x-2 mt-2"
+    >
+      <img
+        [src]="imgCtrl.value"
+        alt="preview"
+        class="w-12 h-12 object-cover rounded"
+      />
+      <span class="truncate max-w-xs text-sm text-gray-600">{{
+        imgCtrl.value
+      }}</span>
+      <button (click)="removeImage(i)" class="text-red-500 font-semibold">
+        Remove
+      </button>
+    </div>
+
+    <!-- Submit -->
+    <button
+      type="submit"
+      class="w-full cursor-pointer py-2 px-4 bg-purple-600 hover:bg-purple-700 text-white rounded transition"
+    >
+      Update Product
+    </button>
+  </form>
+</div>

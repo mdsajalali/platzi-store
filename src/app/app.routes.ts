@@ -6,6 +6,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CartsComponent } from './pages/carts/carts.component';
 import { AllProductsComponent } from './pages/all-products/all-products.component';
 import { AddProductComponent } from './pages/add-product/add-product.component';
+import { UpdateProductComponent } from './pages/update-product/update-product.component';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,10 @@ export const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailsComponent,
+  },
+  {
+    path: 'edit-product/:id',
+    component: UpdateProductComponent,
   },
   {
     path: 'cart',

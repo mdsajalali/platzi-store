@@ -48,4 +48,11 @@ export class ProductService {
       'https://api.escuelajs.co/api/v1/categories'
     );
   }
+
+  updateProduct(
+    productId: number,
+    data: { title: string; price: number }
+  ): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${productId}`, data);
+  }
 }
