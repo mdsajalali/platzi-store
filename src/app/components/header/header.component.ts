@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -8,9 +8,27 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit, OnDestroy {
   isSidebarOpen = false;
   isMobileDashboardOpen = false;
+  cartQuantity: any = 0;
+
+  ngOnInit() {
+    this.updateCartQuantity();
+    window.addEventListener('cartUpdated', this.updateCartQuantity);
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('cartUpdated', this.updateCartQuantity);
+  }
+
+  updateCartQuantity = () => {
+    const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    this.cartQuantity = Object.values(cart).reduce(
+      (sum: any, qty: any) => sum + qty,
+      0
+    );
+  };
 
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;

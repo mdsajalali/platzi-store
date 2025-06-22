@@ -16,6 +16,7 @@
       <span class="text-gray-500">{{ product.category.name }}</span>
       <p class="text-gray-900 mt-1 font-semibold">Price: ${{ product.price }}</p>
       <button
+      (click)="addToCart()"
         class="mt-2 w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg transition cursor-pointer"
       >
         Add To Cart

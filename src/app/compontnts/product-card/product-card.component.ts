@@ -10,4 +10,15 @@ import { Product } from '../../types';
 })
 export class ProductCardComponent {
   @Input() product!: Product;
+
+  addToCart() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    if (cart[this.product.id]) {
+      cart[this.product.id] += 1;
+    } else {
+      cart[this.product.id] = 1;
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.dispatchEvent(new Event('cartUpdated'));
+  }
 }

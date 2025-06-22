@@ -1,31 +1,56 @@
+<!-- carts.component.html -->
+
 <div class="container mx-auto px-4 py-8">
   <h1 class="text-2xl font-bold mb-6">Your Shopping Cart</h1>
 
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div *ngIf="cartItems.length === 0" class="text-center text-gray-600">
+    Your cart is empty.
+  </div>
+
+  <div
+    *ngIf="cartItems.length > 0"
+    class="grid grid-cols-1 lg:grid-cols-3 gap-6"
+  >
     <div class="lg:col-span-2 space-y-4">
       <div
+        *ngFor="let item of cartItems; let i = index"
         class="flex flex-col md:flex-row items-center gap-4 bg-white p-4 shadow rounded-lg"
       >
         <img
-          src="https://via.placeholder.com/100"
-          alt="Product"
+          [src]="item.product.images[0]"
+          [alt]="item.product.title"
           class="w-24 h-24 rounded object-cover"
         />
         <div class="flex-1">
-          <h2 class="font-semibold text-lg">Product Name</h2>
-          <p class="text-sm text-gray-500">Short product description</p>
+          <h2 class="font-semibold text-lg">{{ item.product.title }}</h2>
+          <p class="text-sm text-gray-500">{{ item.product.description }}</p>
           <div class="mt-2 flex items-center gap-2">
-            <label for="qty" class="text-sm">Qty:</label>
+            <label for="qty-{{ i }}" class="text-sm">Qty:</label>
+            <button
+              class="px-2 bg-gray-200 rounded"
+              (click)="decreaseQuantity(i)"
+            >
+              -
+            </button>
             <input
-              id="qty"
+              id="qty-{{ i }}"
               type="number"
               min="1"
-              value="1"
-              class="w-16 border rounded px-2 py-1 text-sm"
+              [value]="item.quantity"
+              (input)="updateQuantity($event, i)"
+              class="w-16 border rounded px-2 py-1 text-sm text-center"
             />
+            <button
+              class="px-2 bg-gray-200 rounded"
+              (click)="increaseQuantity(i)"
+            >
+              +
+            </button>
           </div>
         </div>
-        <div class="font-bold text-lg">$49.99</div>
+        <div class="font-bold text-lg">
+          ${{ item.product.price * item.quantity }}
+        </div>
       </div>
     </div>
 
@@ -34,15 +59,15 @@
       <h2 class="text-xl font-semibold mb-4">Order Summary</h2>
       <div class="flex justify-between mb-2">
         <span>Subtotal</span>
-        <span>$49.99</span>
+        <span>${{ subtotal }}</span>
       </div>
       <div class="flex justify-between mb-2">
         <span>Shipping</span>
-        <span>$5.00</span>
+        <span>${{ shipping }}</span>
       </div>
       <div class="flex justify-between font-bold border-t pt-2 mt-2">
         <span>Total</span>
-        <span>$54.99</span>
+        <span>${{ total }}</span>
       </div>
 
       <div class="mt-6">
@@ -56,9 +81,17 @@
 
       <button
         class="w-full bg-purple-600 text-white px-4 cursor-pointer hover:bg-purple-700 mt-6 py-3 rounded-lg text-sm transition-all duration-300"
+        (click)="proceedToPayment()"
       >
         Proceed to Payment
       </button>
+
+      <p
+        *ngIf="paymentMessage"
+        class="mt-4 text-green-600 font-semibold text-center"
+      >
+        {{ paymentMessage }}
+      </p>
     </div>
   </div>
 </div>
