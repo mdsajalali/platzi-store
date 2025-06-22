@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../types';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carts',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './carts.component.html',
   styleUrl: './carts.component.css',
@@ -15,12 +17,11 @@ export class CartsComponent {
     quantity: number;
   }[] = [];
 
-  shipping = 5; // fixed shipping cost
+  shipping = 5;  
   subtotal = 0;
   total = 0;
-  paymentMessage = '';
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
     this.loadCart();
@@ -36,7 +37,6 @@ export class CartsComponent {
       return;
     }
 
-    // Fetch product details for all IDs
     Promise.all(
       productIds.map((id) =>
         this.productService.getProductById(+id).toPromise()
@@ -85,16 +85,21 @@ export class CartsComponent {
     });
     localStorage.setItem('cart', JSON.stringify(cart));
     this.calculateTotals();
-    window.dispatchEvent(new Event('cartUpdated'));  
+    window.dispatchEvent(new Event('cartUpdated'));
   }
 
   proceedToPayment() {
+    alert(
+      'Thank you for your purchase! Your order has been processed successfully.'
+    );
     localStorage.removeItem('cart');
     this.cartItems = [];
     this.subtotal = 0;
     this.total = 0;
-    this.paymentMessage =
-      'Thank you for your purchase! Your order has been processed successfully.';
     window.dispatchEvent(new Event('cartUpdated'));
+
+    setTimeout(() => {
+      this.router.navigate(['/products']);
+    }, 3000);
   }
 }
