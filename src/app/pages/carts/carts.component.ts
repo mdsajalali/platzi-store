@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../types';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './carts.component.html',
   styleUrl: './carts.component.css',
 })
-export class CartsComponent {
+export class CartsComponent implements OnInit{
   cartItems: {
     product: Product;
     quantity: number;

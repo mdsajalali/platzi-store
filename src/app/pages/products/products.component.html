@@ -1,5 +1,4 @@
 <div class="flex flex-col md:flex-row bg-white text-gray-900 p-4 container mx-auto">
-  <!-- Sidebar -->
   <div class="w-full md:w-1/4 p-4">
     <div class="mb-4">
       <input
@@ -78,7 +77,6 @@
     
   </div>
 
-  <!-- Products Grid -->
   <div class="w-full md:w-3/4 p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
     <ng-container *ngIf="loading()">Loading products...</ng-container>
     <ng-container *ngIf="!loading() && products().length === 0">No products found.</ng-container>

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ProductCardComponent } from '../../compontnts/product-card/product-card.component';
+import { Component, OnInit } from '@angular/core';
+import { ProductCardComponent } from '../product-card/product-card.component';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../types';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './featured-products.component.html',
   styleUrl: './featured-products.component.css',
 })
-export class FeaturedProductsComponent {
+export class FeaturedProductsComponent implements OnInit {
   products: Product[] = [];
 
   constructor(private productService: ProductService) {}

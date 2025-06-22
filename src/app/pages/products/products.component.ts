@@ -1,5 +1,5 @@
 import { Component, effect, signal } from '@angular/core';
-import { ProductCardComponent } from '../../compontnts/product-card/product-card.component';
+import { ProductCardComponent } from '../../components/product-card/product-card.component';
 import { Product } from '../../types';
 import { ProductService } from '../../services/product.service';
 import { CommonModule } from '@angular/common';
@@ -25,18 +25,15 @@ export class ProductsComponent {
     private productService: ProductService,
     private route: ActivatedRoute
   ) {
-    // Subscribe to query param changes
     this.routeSub = this.route.queryParamMap.subscribe((params: ParamMap) => {
       const catId = params.get('categoryId');
       this.selectedCategory.set(catId ? +catId : null);
       this.fetchProducts();
     });
 
-    // Optional: watch signals for title or category changes and refetch products
     effect(() => {
       this.searchTitle();
       this.selectedCategory();
-      // fetchProducts(); // This can be redundant if you rely on route param subscription to fetch
     });
   }
 
@@ -66,8 +63,6 @@ export class ProductsComponent {
 
   filterByCategory(id: number | null) {
     this.selectedCategory.set(id);
-    // Optionally update URL query param here if you want sync
-    // For example using router.navigate([...], { queryParams: { categoryId: id }})
     this.fetchProducts();
   }
 

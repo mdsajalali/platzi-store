@@ -55,7 +55,6 @@
   <div class="fixed inset-0 bg-black/30 z-40 transition-opacity duration-300" *ngIf="isSidebarOpen"
     (click)="toggleSidebar()"></div>
 
-  <!-- Mobile Sidebar -->
   <div class="fixed top-0 left-0 w-64 h-full bg-white z-50 transform transition-transform duration-300"
     [ngClass]="{ '-translate-x-full': !isSidebarOpen, 'translate-x-0': isSidebarOpen }">
     <div class="p-4 flex justify-between items-center border-b border-gray-300">

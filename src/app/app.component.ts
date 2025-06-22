@@ -10,4 +10,8 @@ import { FooterComponent } from './components/footer/footer.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
-export class AppComponent {}
+export class AppComponent {
+  title() {
+    throw new Error('Method not implemented.');
+  }
+}

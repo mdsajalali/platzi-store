@@ -22,7 +22,7 @@ export const routes: Routes = [
     component: ProductDetailsComponent,
   },
   {
-    path: 'edit-product/:id',
+    path: 'update-product/:id',
     component: UpdateProductComponent,
   },
   {

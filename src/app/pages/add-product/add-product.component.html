@@ -6,7 +6,6 @@
   >
     <h2 class="text-2xl font-bold text-gray-800">Add New Product</h2>
 
-    <!-- Title -->
     <div>
       <label class="block text-sm font-medium text-gray-700">Title</label>
       <input
@@ -22,7 +21,6 @@
       </p>
     </div>
 
-    <!-- Price -->
     <div>
       <label class="block text-sm font-medium text-gray-700">Price</label>
       <input
@@ -38,7 +36,6 @@
       </p>
     </div>
 
-    <!-- Description -->
     <div>
       <label class="block text-sm font-medium text-gray-700">Description</label>
       <textarea
@@ -56,7 +53,6 @@
       </p>
     </div>
 
-    <!-- Category ID -->
     <div>
       <label class="block text-sm font-medium text-gray-700">Category ID</label>
       <input
@@ -79,7 +75,6 @@
       </p>
     </div>
 
-    <!-- Image URL Input -->
     <div>
       <label class="block text-sm font-medium text-gray-700">Image URL</label>
       <input
@@ -96,7 +91,6 @@
       </p>
     </div>
 
-    <!-- Show added images -->
     <div
       *ngFor="let imgCtrl of images.controls; let i = index"
       class="flex items-center space-x-2 mt-2"
@@ -110,7 +104,6 @@
       <button (click)="removeImage(i)" class="text-red-500 font-bold">X</button>
     </div>
 
-    <!-- Submit -->
     <button
       type="submit"
       class="w-full cursor-pointer py-2 px-4 bg-purple-600 text-white rounded hover:bg-purple-700 transition"
