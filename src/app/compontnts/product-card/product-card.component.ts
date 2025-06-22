@@ -20,5 +20,7 @@ export class ProductCardComponent {
     }
     localStorage.setItem('cart', JSON.stringify(cart));
     window.dispatchEvent(new Event('cartUpdated'));
+
+    alert('✅ Product added to cart!');
   }
 }

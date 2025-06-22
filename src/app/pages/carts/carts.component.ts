@@ -17,7 +17,7 @@ export class CartsComponent {
     quantity: number;
   }[] = [];
 
-  shipping = 5;  
+  shipping = 5;
   subtotal = 0;
   total = 0;
 
@@ -71,11 +71,15 @@ export class CartsComponent {
   }
 
   updateQuantity(event: any, index: number) {
-    const value = parseInt(event.target.value, 10);
-    if (value > 0) {
-      this.cartItems[index].quantity = value;
-      this.updateCartStorage();
+    let value = parseInt(event.target.value, 10);
+
+    if (isNaN(value) || value <= 0) {
+      value = 1;
+      event.target.value = '1';
     }
+
+    this.cartItems[index].quantity = value;
+    this.updateCartStorage();
   }
 
   updateCartStorage() {
@@ -84,6 +88,18 @@ export class CartsComponent {
       cart[item.product.id] = item.quantity;
     });
     localStorage.setItem('cart', JSON.stringify(cart));
+    this.calculateTotals();
+    window.dispatchEvent(new Event('cartUpdated'));
+  }
+
+  removeItem(index: number) {
+    const productId = this.cartItems[index].product.id;
+    this.cartItems.splice(index, 1);
+
+    const cart = JSON.parse(localStorage.getItem('cart') || '{}');
+    delete cart[productId];
+    localStorage.setItem('cart', JSON.stringify(cart));
+
     this.calculateTotals();
     window.dispatchEvent(new Event('cartUpdated'));
   }
