@@ -1,59 +1,60 @@
-# PlatziStore
+# PlatziStore 🛒
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+PlatziStore is a modern, responsive e-commerce web application built with Angular 19, TypeScript, and Tailwind CSS. It connects to the [Platzi Fake API](https://fakeapi.platzi.com/en/about/introduction) and provides full **CRUD** functionality for managing products.
 
-## Development server
+> 🌐 **Live Demo:** [https://ssl-ecommerce.vercel.app](https://ssl-ecommerce.vercel.app)  
 
-To start a local development server, run:
+---
 
-```bash
+## ✨ Features
+
+- ✅ List all products  
+- 🛍️ View product details  
+- 🔍 Filter products by category  
+- 🔎 Search products by title  
+- ➕ Create a new product  
+- ✏️ Update existing product  
+- ❌ Delete product  
+- 🛒 Add/remove products from the shopping cart (with localStorage)
+- ✅ Real-time form validation  
+- 🎨 Fully responsive UI with Tailwind CSS
+
+---
+
+## 🧰 Tech Stack
+
+| Tech        | Description                                |
+|-------------|--------------------------------------------|
+| **Angular** | Angular 19 with standalone components       |
+| **TypeScript** | Strongly typed development                |
+| **Tailwind CSS** | Utility-first modern styling           |
+| **Platzi Fake API** | RESTful API for product data        |
+| **Vercel**   | Deployment platform for the live site     |
+
+---
+
+## Getting Started
+
+### 1️⃣ Clone the Repository
+
+```sh
+git clone https://github.com/mdsajalali/platzi-store.git
+cd platzi-store
+```
+
+### 2️⃣ Install Dependencies
+
+```sh
+npm install
+```
+
+### 3️⃣ Run the Project
+
+```sh
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+The app will be available at **http://localhost:4200** 🚀
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
