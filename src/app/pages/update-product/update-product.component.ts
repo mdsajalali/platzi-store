@@ -93,7 +93,7 @@ export class UpdateProductComponent {
 
   categoryIdValidator(control: any): { [key: string]: boolean } | null {
     const value = Number(control.value);
-    if (isNaN(value) || value < 1 || value > 6) {
+    if (isNaN(value) || value < 1 || value > 5) {
       return { invalidCategoryId: true };
     }
     return null;

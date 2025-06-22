@@ -10,11 +10,12 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css',
 })
@@ -41,7 +42,7 @@ export class AddProductComponent {
 
   categoryIdValidator(control: AbstractControl): ValidationErrors | null {
     const value = +control.value;
-    if (!value || value < 1 || value > 6) {
+    if (!value || value < 1 || value > 5) {
       return { invalidCategoryId: true };
     }
     return null;
