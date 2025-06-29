@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -19,8 +19,18 @@ import { CommonModule } from '@angular/common';
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.css',
 })
-export class AddProductComponent {
+export class AddProductComponent implements OnInit {
   form: FormGroup;
+  categories: any[] = [];
+
+  ngOnInit() {
+    this.productService.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: (err) => console.error('Failed to load categories', err),
+    });
+  }
 
   constructor(
     private fb: FormBuilder,
@@ -42,7 +52,7 @@ export class AddProductComponent {
 
   categoryIdValidator(control: AbstractControl): ValidationErrors | null {
     const value = +control.value;
-    if (!value || value < 1 || value > 100) {
+    if (!value) {
       return { invalidCategoryId: true };
     }
     return null;

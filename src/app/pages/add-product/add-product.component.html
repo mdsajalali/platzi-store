@@ -44,17 +44,22 @@
 
     <div>
       <label class="block text-sm font-medium text-gray-700">Category ID</label>
-      <input
+      <select
         formControlName="categoryId"
-        type="number"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      @if (form.get('categoryId')?.touched && form.get('categoryId')?.errors) {
+      >
+        <option value="">Select a Category</option>
+        @for(category of categories; track category.id){
+        <option [value]="category.id">
+          {{ category.id }}
+        </option>
+        }
+      </select>
+
+      @if(form.get('categoryId')?.touched && form.get('categoryId')?.errors){
       <p class="text-red-500 text-sm">
-        @if (form.get('categoryId')?.errors?.['required']) {
-        <span>Category ID is required</span>
-        } @if (form.get('categoryId')?.errors?.['invalidCategoryId']) {
-        <span>Category ID must be between 1 and 100</span>
+        @if(form.get('categoryId')?.errors?.['required']){
+        <span> Category ID is required </span>
         }
       </p>
       }
