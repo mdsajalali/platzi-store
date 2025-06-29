@@ -32,7 +32,7 @@ export class AddProductComponent {
       price: [null, [Validators.required, Validators.min(1)]],
       description: ['', Validators.required],
       categoryId: [null, [Validators.required, this.categoryIdValidator]],
-      images: this.fb.array([], Validators.required), // only URLs allowed here
+      images: this.fb.array([], Validators.required),
     });
   }
 
@@ -42,7 +42,7 @@ export class AddProductComponent {
 
   categoryIdValidator(control: AbstractControl): ValidationErrors | null {
     const value = +control.value;
-    if (!value || value < 1 || value > 5) {
+    if (!value || value < 1 || value > 100) {
       return { invalidCategoryId: true };
     }
     return null;

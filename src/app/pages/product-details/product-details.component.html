@@ -19,10 +19,8 @@
       Back to Products
     </a>
 
-    <div
-      *ngIf="product"
-      class="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row"
-    >
+    @if(product){
+    <div class="bg-white p-6 rounded-lg shadow-md flex flex-col md:flex-row">
       <div class="md:w-1/2">
         <img
           [src]="mainImage"
@@ -55,9 +53,8 @@
         </button>
       </div>
     </div>
-
-    <div *ngIf="!product" class="text-center py-10">
-      Loading product details...
-    </div>
+    } @if(!product){
+    <div class="text-center py-10">Loading product details...</div>
+    }
   </div>
 </div>

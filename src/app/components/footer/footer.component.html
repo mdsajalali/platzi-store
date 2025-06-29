@@ -11,10 +11,14 @@
       <div>
         <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
         <ul class="space-y-2">
-          <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
-          <li><a href="#" class="text-gray-400 hover:text-white">Shop</a></li>
           <li>
-            <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+            <a routerLink="/" class="text-gray-400 hover:text-white">Home</a>
+          </li>
+          <li>
+            <a routerLink="/products" class="text-gray-400 hover:text-white">Products</a>
+          </li>
+          <li>
+            <a routerLink="/contact" class="text-gray-400 hover:text-white">Contact</a>
           </li>
         </ul>
       </div>
@@ -22,11 +26,10 @@
         <h3 class="text-xl font-semibold mb-4">Contact Us</h3>
         <p class="text-gray-400">Phone: +88 0131519917</p>
         <p class="text-gray-400">support&#64;platzistore.com</p>
-
       </div>
     </div>
     <div class="mt-8 text-center text-gray-400">
-      &copy; 2025 Platzi Store. All rights reserved.
+      &copy; {{getFullYear}} Platzi Store. All rights reserved.
     </div>
   </div>
 </footer>

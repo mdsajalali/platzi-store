@@ -13,12 +13,9 @@
         type="text"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <p
-        *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
-        class="text-red-500 text-sm"
-      >
-        Title is required
-      </p>
+      @if(form.get('title')?.invalid && form.get('title')?.touched){
+      <p class="text-red-500 text-sm">Title is required</p>
+      }
     </div>
 
     <div>
@@ -28,12 +25,9 @@
         type="number"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <p
-        *ngIf="form.get('price')?.invalid && form.get('price')?.touched"
-        class="text-red-500 text-sm"
-      >
-        Price must be at least 1
-      </p>
+      @if(form.get('price')?.invalid && form.get('price')?.touched){
+      <p class="text-red-500 text-sm">Price must be at least 1</p>
+      }
     </div>
 
     <div>
@@ -43,14 +37,9 @@
         rows="4"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       ></textarea>
-      <p
-        *ngIf="
-          form.get('description')?.invalid && form.get('description')?.touched
-        "
-        class="text-red-500 text-sm"
-      >
-        Description is required
-      </p>
+      @if(form.get('description')?.invalid && form.get('description')?.touched){
+      <p class="text-red-500 text-sm">Description is required</p>
+      }
     </div>
 
     <div>
@@ -60,19 +49,15 @@
         type="number"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <p
-        *ngIf="
-          form.get('categoryId')?.touched && form.get('categoryId')?.errors
-        "
-        class="text-red-500 text-sm"
-      >
-        <span *ngIf="form.get('categoryId')?.errors?.['required']"
-          >Category ID is required</span
-        >
-        <span *ngIf="form.get('categoryId')?.errors?.['invalidCategoryId']">
-          Category ID must be between 1 and 5
-        </span>
+      @if (form.get('categoryId')?.touched && form.get('categoryId')?.errors) {
+      <p class="text-red-500 text-sm">
+        @if (form.get('categoryId')?.errors?.['required']) {
+        <span>Category ID is required</span>
+        } @if (form.get('categoryId')?.errors?.['invalidCategoryId']) {
+        <span>Category ID must be between 1 and 100</span>
+        }
       </p>
+      }
     </div>
 
     <div>
@@ -83,12 +68,9 @@
         placeholder="Enter image URL"
         class="mt-1 block w-full border border-gray-300 rounded-md p-2"
       />
-      <p
-        *ngIf="form.get('images')?.invalid && form.get('images')?.touched"
-        class="text-red-500 text-sm"
-      >
-        At least one image URL is required
-      </p>
+      @if(form.get('images')?.invalid && form.get('images')?.touched){
+      <p class="text-red-500 text-sm">At least one image URL is required</p>
+      }
     </div>
 
     <div

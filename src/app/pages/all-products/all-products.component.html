@@ -23,21 +23,18 @@
     </thead>
 
     <tbody class="divide-y divide-gray-200">
-      <ng-container *ngIf="loading">
-        <tr>
-          <td colspan="5" class="px-4 py-4 text-center">Loading...</td>
-        </tr>
-      </ng-container>
-
-      <ng-container *ngIf="!loading && products.length === 0">
-        <tr>
-          <td colspan="5" class="px-4 py-4 text-center text-gray-500">
-            No products found.
-          </td>
-        </tr>
-      </ng-container>
-
-      <tr *ngFor="let product of products">
+      @if(loading){
+      <tr>
+        <td colspan="5" class="px-4 py-4 text-center">Loading...</td>
+      </tr>
+      } @if(!loading && products.length === 0){
+      <tr>
+        <td colspan="5" class="px-4 py-4 text-center text-gray-500">
+          No products found.
+        </td>
+      </tr>
+      } @for(product of products; track product.id){
+      <tr>
         <td class="px-4 py-3">
           <img
             [src]="product.images[0]"
@@ -103,6 +100,7 @@
           </div>
         </td>
       </tr>
+      }
     </tbody>
   </table>
 </div>
