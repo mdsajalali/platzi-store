@@ -21,6 +21,8 @@ export class UpdateProductComponent {
   form!: FormGroup;
   productId!: number;
 
+  categories: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -29,6 +31,12 @@ export class UpdateProductComponent {
   ) {}
 
   ngOnInit(): void {
+    this.productService.getCategories().subscribe({
+      next: (res) => {
+        this.categories = res;
+      },
+      error: (err) => console.error('Failed to load categories', err),
+    });
     this.form = this.fb.group({
       title: ['', Validators.required],
       price: [1, [Validators.required, Validators.min(1)]],
@@ -82,12 +90,18 @@ export class UpdateProductComponent {
 
     const data = {
       title: this.form.value.title,
-      price: this.form.value.price,
+      price: +this.form.value.price,
     };
 
-    this.productService.updateProduct(this.productId, data).subscribe(() => {
-      alert('✅ Product updated successfully!');
-      this.router.navigate(['/dashboard/products']);
+    this.productService.updateProduct(this.productId, data).subscribe({
+      next: () => {
+        alert('✅ Product updated successfully!');
+        this.router.navigate(['/dashboard/products']);
+      },
+      error: (err) => {
+        console.error('Update failed:', err);
+        alert('❌ Internal Server Error.');
+      },
     });
   }
 
