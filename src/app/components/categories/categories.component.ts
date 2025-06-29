@@ -11,15 +11,21 @@ import { CommonModule } from '@angular/common';
 })
 export class CategoriesComponent implements OnInit {
   categories: { id: number; name: string; image: string }[] = [];
+  loading: boolean = false;
 
   constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit() {
+    this.loading = true;
     this.productService.getCategories().subscribe({
       next: (res) => {
         this.categories = res;
+        this.loading = false;
       },
-      error: (err) => console.error('Failed to load categories', err),
+      error: (err) => {
+        console.error('Failed to load categories', err);
+        this.loading = false;
+      },
     });
   }
 

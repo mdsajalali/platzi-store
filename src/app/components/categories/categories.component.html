@@ -1,7 +1,10 @@
 <section class="py-12">
   <div class="container mx-auto px-4">
     <h2 class="text-3xl font-bold text-center mb-8">Shop by Category</h2>
-    <div
+    @if(loading){
+      <p class="text-center">Loading...</p>
+    }@else {
+      <div
       class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4"
     >
       @for(category of categories; track category.id){
@@ -20,5 +23,6 @@
       </div>
       }
     </div>
+    }
   </div>
 </section>
